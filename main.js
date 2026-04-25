@@ -154,6 +154,7 @@ resizeCanvas();
 
 const CONFETTI_COLORS = [
   "#ff6b9d", "#ff0000", "#ffffff", "#ff8fab", "#ffc1e3",
+  "#ffd700", "#00ff00", "#00bfff", "#ff00ff", "#ff4500", "#00ffff"
 ];
 
 class Confetti {
