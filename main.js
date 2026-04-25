@@ -383,6 +383,14 @@ function closeModal() {
 let slideIndex = 0;
 let slides = [];
 let dots = [];
+let slideInterval = null;
+
+function resetSlideInterval() {
+  if (slideInterval) clearInterval(slideInterval);
+  slideInterval = setInterval(() => {
+    changeSlide(1);
+  }, 3500); // Change image every 3.5 seconds
+}
 
 function openGallery() {
   const modal = document.getElementById("gallery-modal");
@@ -395,20 +403,26 @@ function openGallery() {
     dots = document.querySelectorAll(".dot");
     showSlide(0);
   }
+  
+  // Start or reset the auto-rotate timer whenever opened
+  resetSlideInterval();
 }
 
 function closeGallery() {
   const modal = document.getElementById("gallery-modal");
   if (modal) modal.hidden = true;
   document.body.style.overflow = "";
+  if (slideInterval) clearInterval(slideInterval);
 }
 
 function changeSlide(n) {
   showSlide(slideIndex + n);
+  resetSlideInterval(); // Reset timer when manually navigating
 }
 
 function currentSlide(n) {
   showSlide(n);
+  resetSlideInterval(); // Reset timer when clicking a dot
 }
 
 function showSlide(n) {
