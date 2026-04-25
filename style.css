@@ -260,6 +260,83 @@ body {
   text-shadow: 0 0 20px rgba(255, 107, 157, 0.5);
 }
 
+/* ── SCROLL DOWN INDICATOR ───────────────────────────── */
+.scroll-down-indicator {
+  position: absolute;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  z-index: 10;
+  text-decoration: none;
+  opacity: 0.8;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.scroll-down-indicator:hover {
+  opacity: 1;
+  transform: translateX(-50%) translateY(3px);
+}
+
+.mouse {
+  width: 26px;
+  height: 42px;
+  border: 2.5px solid var(--primary);
+  border-radius: 20px;
+  position: relative;
+  box-shadow: 0 0 10px rgba(255, 107, 157, 0.3), inset 0 0 10px rgba(255, 107, 157, 0.3);
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(2px);
+}
+
+.wheel {
+  width: 4px;
+  height: 8px;
+  background: var(--primary);
+  border-radius: 2px;
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: scrollWheel 2s infinite cubic-bezier(0.15, 0.41, 0.69, 0.94);
+  box-shadow: 0 0 5px var(--primary);
+}
+
+.arrow-down span {
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-bottom: 2.5px solid var(--primary);
+  border-right: 2.5px solid var(--primary);
+  transform: rotate(45deg);
+  margin: -4px 0;
+  animation: arrowPulse 2s infinite;
+  box-shadow: 2px 2px 4px rgba(255, 107, 157, 0.1);
+}
+
+.arrow-down span:nth-child(2) {
+  animation-delay: -0.2s;
+}
+
+.arrow-down span:nth-child(3) {
+  animation-delay: -0.4s;
+}
+
+@keyframes scrollWheel {
+  0% { top: 6px; opacity: 1; height: 8px; }
+  30% { top: 16px; opacity: 0; height: 4px; }
+  100% { top: 6px; opacity: 0; height: 8px; }
+}
+
+@keyframes arrowPulse {
+  0% { opacity: 0; transform: rotate(45deg) translate(-5px, -5px); }
+  50% { opacity: 1; }
+  100% { opacity: 0; transform: rotate(45deg) translate(5px, 5px); }
+}
+
 /* ============================================================
    CAKE (Princess Edition)
    ============================================================ */
