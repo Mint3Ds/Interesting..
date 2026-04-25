@@ -395,6 +395,145 @@ body {
   }
 }
 
+/* ── HELLO KITTY DECORATION ─────────────────────── */
+.hello-kitty {
+  position: absolute;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 60px;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.hk-ears {
+  position: absolute;
+  top: -22px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.hk-ear {
+  width: 35px;
+  height: 35px;
+  background: #fff;
+  border: 2px solid #333;
+  border-radius: 40% 40% 10% 10%;
+}
+
+.hk-ear.hk-left {
+  transform: rotate(-25deg);
+}
+.hk-ear.hk-right {
+  transform: rotate(25deg);
+}
+
+.hk-face {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  border: 2.5px solid #333;
+  border-radius: 50% 50% 45% 45% / 60% 60% 40% 40%;
+  overflow: visible;
+}
+
+.hk-bow {
+  position: absolute;
+  top: -10px;
+  left: -5px;
+  width: 38px;
+  height: 28px;
+  background: #ff0000;
+  border: 2px solid #333;
+  border-radius: 8px;
+  z-index: 15;
+  transform: rotate(-15deg);
+  animation: bowBounce 3s ease-in-out infinite;
+}
+
+.hk-bow::before, .hk-bow::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 15px;
+  height: 20px;
+  background: #ff0000;
+  border: 2px solid #333;
+  border-radius: 50%;
+}
+
+.hk-bow::before { left: -10px; transform: translateY(-50%) rotate(-30deg); }
+.hk-bow::after { right: -10px; transform: translateY(-50%) rotate(30deg); }
+
+.bow-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 12px;
+  background: #ff0000;
+  border: 2px solid #333;
+  border-radius: 50%;
+  z-index: 2;
+}
+
+.hk-eye {
+  position: absolute;
+  top: 45%;
+  width: 8px;
+  height: 11px;
+  background: #333;
+  border-radius: 50%;
+}
+
+.hk-eye.hk-left { left: 25%; }
+.hk-eye.hk-right { right: 25%; }
+
+.hk-nose {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 7px;
+  background: #ffeb3b;
+  border: 1.5px solid #333;
+  border-radius: 50%;
+}
+
+.hk-whiskers-l, .hk-whiskers-r {
+  position: absolute;
+  top: 55%;
+  width: 25px;
+}
+
+.hk-whiskers-l { left: -15px; }
+.hk-whiskers-r { right: -15px; }
+
+.hk-whiskers-l span, .hk-whiskers-r span {
+  display: block;
+  width: 100%;
+  height: 1.5px;
+  background: #333;
+  margin: 4px 0;
+  border-radius: 2px;
+}
+
+.hk-whiskers-l span:nth-child(1) { transform: rotate(15deg); }
+.hk-whiskers-l span:nth-child(3) { transform: rotate(-15deg); }
+.hk-whiskers-r span:nth-child(1) { transform: rotate(-15deg); }
+.hk-whiskers-r span:nth-child(3) { transform: rotate(15deg); }
+
+@keyframes bowBounce {
+  0%, 100% { transform: rotate(-15deg) scale(1); }
+  50% { transform: rotate(-15deg) scale(1.1); }
+}
+
 /* ── CAKE TIERS ──────────────────────────────────── */
 .cake-tier {
   position: relative;
@@ -406,26 +545,29 @@ body {
 
 .top-tier {
   width: 140px;
-  height: 60px;
-  background: linear-gradient(135deg, #fbcdef 0%, #f19fcc 100%);
+  height: 65px;
+  background: #ffffff;
   margin: 0 auto;
   z-index: 3;
+  border: 2px solid #fce4ec;
 }
 
 .mid-tier {
   width: 200px;
-  height: 70px;
-  background: linear-gradient(135deg, #fbcdef 0%, #f092c4 100%);
+  height: 75px;
+  background: linear-gradient(135deg, #fff0f6 0%, #fcc2d7 100%);
   margin: -5px auto 0;
   z-index: 2;
+  border: 1px solid #ffdeeb;
 }
 
 .bot-tier {
   width: 260px;
-  height: 80px;
-  background: linear-gradient(135deg, #fbcdef 0%, #ea85ba 100%);
+  height: 85px;
+  background: linear-gradient(135deg, #fcc2d7 0%, #ff85b3 100%);
   margin: -5px auto 0;
   z-index: 1;
+  border: 1px solid #ffdeeb;
 }
 
 /* Glitter Effect */
@@ -464,44 +606,79 @@ body {
   z-index: 1;
 }
 
-/* Decorative Bows */
+/* Decorative Bows (Hello Kitty Red) */
 .bow {
   position: absolute;
-  top: 50%;
-  left: 5px;
+  top: 45%;
   transform: translateY(-50%);
-  width: 30px;
-  height: 15px;
-  background: #ff8fab;
-  border-radius: 3px;
+  width: 26px;
+  height: 18px;
+  background: #ff0000;
+  border: 1.5px solid #333;
+  border-radius: 4px;
   z-index: 5;
+  transition: transform 0.3s ease;
 }
 
-.bow-right {
-  left: auto;
-  right: 5px;
+.bow:hover {
+  transform: translateY(-50%) scale(1.2);
 }
+
+.bow-left { left: 15px; transform: translateY(-50%) rotate(-10deg); }
+.bow-right { right: 15px; transform: translateY(-50%) rotate(10deg); }
+.bow-center-deco { left: 50%; transform: translate(-50%, -50%); }
 
 .bow::before,
 .bow::after {
   content: '';
   position: absolute;
-  width: 15px;
-  height: 15px;
-  background: #ff8fab;
-  border-radius: 50% 50% 0 50%;
+  top: 50%;
+  width: 12px;
+  height: 16px;
+  background: #ff0000;
+  border: 1.5px solid #333;
+  border-radius: 50%;
 }
 
 .bow::before {
   left: -8px;
-  transform: rotate(-45deg);
+  transform: translateY(-50%) rotate(-30deg);
 }
 
 .bow::after {
   right: -8px;
-  transform: rotate(45deg);
-  border-radius: 50% 50% 50% 0;
+  transform: translateY(-50%) rotate(30deg);
 }
+
+/* Hearts */
+.heart-deco {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: #ffffff;
+  transform: rotate(-45deg);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+  z-index: 4;
+}
+
+.heart-deco::before,
+.heart-deco::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: #ffffff;
+  border-radius: 50%;
+}
+
+.heart-deco::before { top: -5px; left: 0; }
+.heart-deco::after { top: 0; left: 5px; }
+
+.hd-1 { top: 25%; left: 35%; }
+.hd-2 { top: 25%; right: 35%; }
+.hd-3 { top: 30%; left: 25%; }
+.hd-4 { top: 30%; right: 25%; }
+.hd-5 { top: 20%; left: 50%; transform: translateX(-50%) rotate(-45deg); }
 
 /* Pearls */
 .tier-pearls {
