@@ -368,8 +368,6 @@ function startExperience() {
 // ─── WISH MODAL ────────────────────────────────────────────────
 function openModal() {
   const modal = document.getElementById("wish-modal");
-  const msg = document.getElementById("modal-message");
-  msg.textContent = CONFIG.message;
   modal.hidden = false;
   document.body.style.overflow = "hidden";
   launchConfetti(60);
