@@ -365,7 +365,7 @@ function startExperience() {
   }, 2200);
 }
 
-// ─── MODAL ───────────────────────────────────────────────────
+// ─── WISH MODAL ────────────────────────────────────────────────
 function openModal() {
   const modal = document.getElementById("wish-modal");
   const msg = document.getElementById("modal-message");
@@ -377,6 +377,52 @@ function openModal() {
 function closeModal() {
   document.getElementById("wish-modal").hidden = true;
   document.body.style.overflow = "";
+}
+
+// ─── GALLERY MODAL & SLIDESHOW ───────────────────────────────
+let slideIndex = 0;
+let slides = [];
+let dots = [];
+
+function openGallery() {
+  const modal = document.getElementById("gallery-modal");
+  if (!modal) return;
+  modal.hidden = false;
+  document.body.style.overflow = "hidden";
+  
+  if (slides.length === 0) {
+    slides = document.querySelectorAll(".slide");
+    dots = document.querySelectorAll(".dot");
+    showSlide(0);
+  }
+}
+
+function closeGallery() {
+  const modal = document.getElementById("gallery-modal");
+  if (modal) modal.hidden = true;
+  document.body.style.overflow = "";
+}
+
+function changeSlide(n) {
+  showSlide(slideIndex + n);
+}
+
+function currentSlide(n) {
+  showSlide(n);
+}
+
+function showSlide(n) {
+  if (slides.length === 0) return;
+  
+  if (n >= slides.length) slideIndex = 0;
+  else if (n < 0) slideIndex = slides.length - 1;
+  else slideIndex = n;
+
+  slides.forEach(slide => slide.style.display = "none");
+  dots.forEach(dot => dot.classList.remove("active"));
+
+  slides[slideIndex].style.display = "block";
+  if (dots[slideIndex]) dots[slideIndex].classList.add("active");
 }
 
 // ─── HERO NAME ────────────────────────────────────────────────
@@ -438,15 +484,30 @@ async function init() {
   document.getElementById("modal-close")?.addEventListener("click", closeModal);
   document.getElementById("modal-backdrop")?.addEventListener("click", closeModal);
 
+  // Gallery modal
+  document.getElementById("open-gallery-btn")?.addEventListener("click", openGallery);
+  document.getElementById("gallery-close")?.addEventListener("click", closeGallery);
+  document.getElementById("gallery-backdrop")?.addEventListener("click", closeGallery);
+
+  // Slideshow controls
+  document.getElementById("prev-slide")?.addEventListener("click", () => changeSlide(-1));
+  document.getElementById("next-slide")?.addEventListener("click", () => changeSlide(1));
+  document.querySelectorAll(".dot").forEach((dot, index) => {
+    dot.addEventListener("click", () => currentSlide(index));
+  });
+
   // Fireworks button inside modal
   document.getElementById("fireworks-btn")?.addEventListener("click", () => {
     closeModal();
     setTimeout(launchFireworks, 300);
   });
 
-  // Keyboard escape to close modal
+  // Keyboard escape to close modals
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") closeModal();
+    if (e.key === "Escape") {
+      closeModal();
+      closeGallery();
+    }
   });
 }
 

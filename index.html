@@ -201,6 +201,13 @@
           <p>You are surrounded by people who love you deeply. Today we celebrate YOU — our favourite person!</p>
         </article>
       </div>
+
+      <!-- Gallery Action Button -->
+      <div class="gallery-action" style="text-align: center; margin-top: 3rem;">
+        <button class="modal-btn" id="open-gallery-btn">
+          📸 View Memories
+        </button>
+      </div>
     </section>
 
     <!-- ========== FOOTER ========== -->
@@ -209,6 +216,38 @@
     </footer>
 
   </main>
+
+  <!-- ========== GALLERY MODAL ========== -->
+  <div id="gallery-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="gallery-title" hidden>
+    <div class="modal-backdrop" id="gallery-backdrop"></div>
+    <div class="modal-box gallery-box">
+      <button class="modal-close" id="gallery-close" aria-label="Close">✕</button>
+      <h2 id="gallery-title">Memories</h2>
+      
+      <div class="slideshow-container">
+        <!-- 10 Placeholder Images -->
+        <div class="slide fade"><img src="https://placehold.co/800x600/ffb6c1/ad1457?text=Photo+1" alt="Memory 1"></div>
+        <div class="slide fade"><img src="https://placehold.co/800x600/ffc1cc/ad1457?text=Photo+2" alt="Memory 2"></div>
+        <div class="slide fade"><img src="https://placehold.co/800x600/ffd1dc/ad1457?text=Photo+3" alt="Memory 3"></div>
+        <div class="slide fade"><img src="https://placehold.co/800x600/ffe0e6/ad1457?text=Photo+4" alt="Memory 4"></div>
+        <div class="slide fade"><img src="https://placehold.co/800x600/fff0f5/ad1457?text=Photo+5" alt="Memory 5"></div>
+        <div class="slide fade"><img src="https://placehold.co/800x600/ffb6c1/ad1457?text=Photo+6" alt="Memory 6"></div>
+        <div class="slide fade"><img src="https://placehold.co/800x600/ffc1cc/ad1457?text=Photo+7" alt="Memory 7"></div>
+        <div class="slide fade"><img src="https://placehold.co/800x600/ffd1dc/ad1457?text=Photo+8" alt="Memory 8"></div>
+        <div class="slide fade"><img src="https://placehold.co/800x600/ffe0e6/ad1457?text=Photo+9" alt="Memory 9"></div>
+        <div class="slide fade"><img src="https://placehold.co/800x600/fff0f5/ad1457?text=Photo+10" alt="Memory 10"></div>
+
+        <!-- Navigation Buttons -->
+        <a class="prev-btn" id="prev-slide">❮</a>
+        <a class="next-btn" id="next-slide">❯</a>
+      </div>
+      
+      <div class="dot-container">
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      </div>
+    </div>
+  </div>
 
   <script src="main.js"></script>
 </body>
