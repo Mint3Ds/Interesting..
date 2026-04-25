@@ -37,7 +37,7 @@ html {
 body {
   font-family: 'Outfit', sans-serif;
   background-color: var(--bg);
-  background-image: 
+  background-image:
     radial-gradient(var(--bg-dark) 15%, transparent 16%),
     radial-gradient(var(--bg-dark) 15%, transparent 16%);
   background-size: 60px 60px;
@@ -389,10 +389,12 @@ body {
     opacity: 0;
     transform: translateX(-50%) translateY(0) scale(0.8);
   }
+
   20% {
     opacity: 0.7;
     transform: translateX(-50%) translateY(-10px) scale(1);
   }
+
   100% {
     opacity: 0;
     transform: translateX(10px) translateY(-50px) scale(3);
@@ -402,10 +404,10 @@ body {
 /* ── HELLO KITTY DECORATION ─────────────────────── */
 .hello-kitty {
   position: absolute;
-  top: -25px;
+  top: -3px;
   left: 50%;
   transform: translateX(-50%);
-  width: 100px;
+  width: 94px;
   height: 75px;
   z-index: 10;
   pointer-events: none;
@@ -415,10 +417,7 @@ body {
   position: absolute;
   width: 100%;
   height: 100%;
-  filter: drop-shadow(0 -2.5px 0 #222) 
-          drop-shadow(2.5px 0 0 #222) 
-          drop-shadow(0 2.5px 0 #222) 
-          drop-shadow(-2.5px 0 0 #222);
+  filter: drop-shadow(0 -2.5px 0 #222) drop-shadow(2.5px 0 0 #222) drop-shadow(0 2.5px 0 #222) drop-shadow(-2.5px 0 0 #222);
 }
 
 .hk-face {
@@ -438,11 +437,13 @@ body {
   height: 32px;
   background: #fff;
 }
+
 .hk-ear.hk-left {
   left: 6px;
   border-radius: 12px 18px 0 0;
   transform: rotate(-30deg);
 }
+
 .hk-ear.hk-right {
   right: 6px;
   border-radius: 18px 12px 0 0;
@@ -467,6 +468,7 @@ body {
   transform: rotate(-15deg);
   animation: bowBounce 3s ease-in-out infinite;
 }
+
 .hk-bow .bow-l,
 .hk-bow .bow-r {
   position: absolute;
@@ -477,14 +479,17 @@ body {
   border: 2.5px solid #222;
   border-radius: 50%;
 }
+
 .hk-bow .bow-l {
   left: -2px;
   transform: rotate(20deg);
 }
+
 .hk-bow .bow-r {
   right: -2px;
   transform: rotate(-20deg);
 }
+
 .hk-bow .bow-c {
   position: absolute;
   top: 4px;
@@ -506,8 +511,14 @@ body {
   background: #222;
   border-radius: 50%;
 }
-.hk-eye.hk-left { left: 24px; }
-.hk-eye.hk-right { right: 24px; }
+
+.hk-eye.hk-left {
+  left: 24px;
+}
+
+.hk-eye.hk-right {
+  right: 24px;
+}
 
 .hk-nose {
   position: absolute;
@@ -521,15 +532,23 @@ body {
   border-radius: 50%;
 }
 
-.hk-whiskers-l, .hk-whiskers-r {
+.hk-whiskers-l,
+.hk-whiskers-r {
   position: absolute;
   top: 26px;
   width: 22px;
 }
-.hk-whiskers-l { left: -4px; }
-.hk-whiskers-r { right: -4px; }
 
-.hk-whiskers-l span, .hk-whiskers-r span {
+.hk-whiskers-l {
+  left: -4px;
+}
+
+.hk-whiskers-r {
+  right: -4px;
+}
+
+.hk-whiskers-l span,
+.hk-whiskers-r span {
   display: block;
   width: 100%;
   height: 2.5px;
@@ -537,17 +556,41 @@ body {
   border-radius: 2px;
   margin: 5px 0;
 }
-.hk-whiskers-l span:nth-child(1) { transform: rotate(10deg); }
-.hk-whiskers-l span:nth-child(2) { margin-left: -2px; }
-.hk-whiskers-l span:nth-child(3) { transform: rotate(-10deg); }
 
-.hk-whiskers-r span:nth-child(1) { transform: rotate(-10deg); }
-.hk-whiskers-r span:nth-child(2) { margin-left: 2px; }
-.hk-whiskers-r span:nth-child(3) { transform: rotate(10deg); }
+.hk-whiskers-l span:nth-child(1) {
+  transform: rotate(10deg);
+}
+
+.hk-whiskers-l span:nth-child(2) {
+  margin-left: -2px;
+}
+
+.hk-whiskers-l span:nth-child(3) {
+  transform: rotate(-10deg);
+}
+
+.hk-whiskers-r span:nth-child(1) {
+  transform: rotate(-10deg);
+}
+
+.hk-whiskers-r span:nth-child(2) {
+  margin-left: 2px;
+}
+
+.hk-whiskers-r span:nth-child(3) {
+  transform: rotate(10deg);
+}
 
 @keyframes bowBounce {
-  0%, 100% { transform: rotate(-15deg) scale(1); }
-  50% { transform: rotate(-15deg) scale(1.1); }
+
+  0%,
+  100% {
+    transform: rotate(-15deg) scale(1);
+  }
+
+  50% {
+    transform: rotate(-15deg) scale(1.1);
+  }
 }
 
 /* ── CAKE TIERS ──────────────────────────────────── */
@@ -640,9 +683,20 @@ body {
   transform: translateY(-50%) scale(1.2);
 }
 
-.bow-left { left: 15px; transform: translateY(-50%) rotate(-10deg); }
-.bow-right { right: 15px; transform: translateY(-50%) rotate(10deg); }
-.bow-center-deco { left: 50%; transform: translate(-50%, -50%); }
+.bow-left {
+  left: 15px;
+  transform: translateY(-50%) rotate(-10deg);
+}
+
+.bow-right {
+  right: 15px;
+  transform: translateY(-50%) rotate(10deg);
+}
+
+.bow-center-deco {
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 
 .bow::before,
 .bow::after {
@@ -687,14 +741,41 @@ body {
   border-radius: 50%;
 }
 
-.heart-deco::before { top: -5px; left: 0; }
-.heart-deco::after { top: 0; left: 5px; }
+.heart-deco::before {
+  top: -5px;
+  left: 0;
+}
 
-.hd-1 { top: 25%; left: 35%; }
-.hd-2 { top: 25%; right: 35%; }
-.hd-3 { top: 30%; left: 25%; }
-.hd-4 { top: 30%; right: 25%; }
-.hd-5 { top: 20%; left: 50%; transform: translateX(-50%) rotate(-45deg); }
+.heart-deco::after {
+  top: 0;
+  left: 5px;
+}
+
+.hd-1 {
+  top: 25%;
+  left: 35%;
+}
+
+.hd-2 {
+  top: 25%;
+  right: 35%;
+}
+
+.hd-3 {
+  top: 30%;
+  left: 25%;
+}
+
+.hd-4 {
+  top: 30%;
+  right: 25%;
+}
+
+.hd-5 {
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%) rotate(-45deg);
+}
 
 /* Pearls */
 .tier-pearls {
@@ -788,35 +869,46 @@ body {
 .modal-box {
   position: relative;
   z-index: 1;
-  background: linear-gradient(145deg, #1a0a2e, #2a103e);
-  border: 1px solid rgba(255, 107, 157, 0.35);
+  background: #ffffff;
+  border: 4px solid var(--bg-dark);
   border-radius: 28px;
   padding: 3rem 2.5rem;
   max-width: 500px;
   width: 100%;
   text-align: center;
-  box-shadow: 0 0 80px rgba(199, 125, 255, 0.2), 0 32px 80px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 15px 50px rgba(255, 107, 157, 0.3);
   animation: modalPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.modal-box::before {
+  content: '🎀';
+  position: absolute;
+  top: -25px;
+  left: -20px;
+  font-size: 4rem;
+  transform: rotate(-15deg);
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15));
 }
 
 .modal-close {
   position: absolute;
   top: 1rem;
   right: 1rem;
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--bg-dark);
   border: none;
-  color: var(--text-muted);
+  color: var(--text);
   font-size: 1.1rem;
   width: 36px;
   height: 36px;
   border-radius: 50%;
   cursor: pointer;
-  transition: background 0.2s, color 0.2s;
+  transition: background 0.2s, color 0.2s, transform 0.2s;
 }
 
 .modal-close:hover {
-  background: rgba(255, 107, 157, 0.2);
+  background: var(--primary);
   color: #fff;
+  transform: scale(1.1) rotate(90deg);
 }
 
 .modal-icon {
@@ -827,7 +919,7 @@ body {
 .modal-box h2 {
   font-family: 'Pacifico', cursive;
   font-size: 1.9rem;
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  background: linear-gradient(135deg, var(--secondary), var(--primary));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -871,22 +963,34 @@ body {
 }
 
 .modal-btn {
-  padding: 0.9rem 2rem;
+  padding: 1.2rem 2.5rem;
   font-family: 'Outfit', sans-serif;
-  font-size: 1rem;
-  font-weight: 700;
-  border: none;
+  font-size: 1.1rem;
+  font-weight: 800;
+  border: 3px solid #fff;
   border-radius: 50px;
-  background: linear-gradient(135deg, #ffd93d, #ff8fab);
-  color: #1a0a2e;
+  background: linear-gradient(135deg, #ff0000 0%, #ff6b9d 100%);
+  color: #ffffff;
   cursor: pointer;
-  transition: transform var(--transition), box-shadow var(--transition);
-  box-shadow: 0 8px 24px rgba(255, 217, 61, 0.3);
+  transition: all var(--transition);
+  box-shadow: 0 8px 24px rgba(255, 0, 0, 0.25);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  position: relative;
+}
+
+.modal-btn::before {
+  content: '🎀';
+  position: absolute;
+  left: 10px;
+  top: -10px;
+  font-size: 1.5rem;
+  transform: rotate(-15deg);
 }
 
 .modal-btn:hover {
-  transform: scale(1.07);
-  box-shadow: 0 16px 40px rgba(255, 217, 61, 0.5);
+  transform: scale(1.05);
+  box-shadow: 0 16px 40px rgba(255, 0, 0, 0.4);
 }
 
 
@@ -969,7 +1073,7 @@ body {
   left: -5px;
   font-size: 2rem;
   transform: rotate(-15deg);
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
 }
 
 .card:hover {
