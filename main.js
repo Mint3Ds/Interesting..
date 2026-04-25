@@ -53,12 +53,11 @@ function createStars() {
 
 // ─── BALLOONS ────────────────────────────────────────────────
 const BALLOON_COLORS = [
-  "linear-gradient(135deg,#ff6b9d,#ff8fab)",
-  "linear-gradient(135deg,#ffd93d,#ffe066)",
-  "linear-gradient(135deg,#6bcb77,#4caf50)",
-  "linear-gradient(135deg,#c77dff,#9d4edd)",
-  "linear-gradient(135deg,#4fc3f7,#0288d1)",
-  "linear-gradient(135deg,#ff7043,#bf360c)",
+  "#ffffff", // Pearl White
+  "#ff8fab", // Soft Pink
+  "#ff0000", // Hello Kitty Red
+  "#ffccd5", // Blossom Pink
+  "#fff0f3", // Creamy White
 ];
 
 function createBalloons() {
@@ -152,8 +151,7 @@ window.addEventListener("resize", resizeCanvas);
 resizeCanvas();
 
 const CONFETTI_COLORS = [
-  "#ff6b9d", "#ffd93d", "#6bcb77", "#c77dff", "#4fc3f7",
-  "#ff8fab", "#ffe066", "#9d4edd", "#ff7043", "#00bcd4",
+  "#ff6b9d", "#ff0000", "#ffffff", "#ff8fab", "#ffc1e3",
 ];
 
 class Confetti {
