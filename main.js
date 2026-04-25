@@ -56,8 +56,10 @@ const BALLOON_COLORS = [
   "#ffffff", // Pearl White
   "#ff8fab", // Soft Pink
   "#ff0000", // Hello Kitty Red
-  "#ffccd5", // Blossom Pink
-  "#fff0f3", // Creamy White
+  "#bae1ff", // Pastel Blue
+  "#baffc9", // Pastel Green
+  "#ffffba", // Pastel Yellow
+  "#e6ccff", // Pastel Purple
 ];
 
 function createBalloons() {
@@ -418,7 +420,7 @@ function closeGallery() {
   if (modal) modal.hidden = true;
   document.body.style.overflow = "";
   if (slideInterval) clearInterval(slideInterval);
-  
+
   // Switch back to the main birthday music
   if (audio) {
     audio.src = "bd_music.mp3";
