@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🎂 Happy Birthday! 🎉</title>
+  <meta name="description"
+    content="A magical and joyful Happy Birthday celebration website filled with confetti, balloons, fireworks, and love!" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Outfit:wght@300;400;600;700;900&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- ========== START OVERLAY (Force Music) ========== -->
+  <div id="play-overlay">
+    <div class="play-content">
+      <div class="play-icon">🎵</div>
+      <h2>A surprise for Steph!</h2>
+      <p>Please turn on your sound for the best experience.</p>
+      <button id="start-btn">Click to Celebrate!</button>
+    </div>
+  </div>
+
+  <!-- ========== LOADING SCREEN ========== -->
+  <div id="loader" class="hidden">
+    <div class="loader-cake">
+      <div class="cake-top"></div>
+      <div class="cake-bottom"></div>
+      <div class="loader-candle">
+        <div class="loader-flame"></div>
+      </div>
+    </div>
+    <p class="loader-text">Preparing your surprise…</p>
+  </div>
+
+  <!-- ========== CANVAS (Confetti + Fireworks) ========== -->
+  <canvas id="canvas"></canvas>
+
+  <!-- ========== FLOATING BALLOONS ========== -->
+  <div id="balloons-container" aria-hidden="true"></div>
+
+  <!-- ========== HERO SECTION ========== -->
+  <main id="main-content">
+
+    <section class="hero" id="hero">
+      <div class="stars" aria-hidden="true"></div>
+
+      <div class="hero-content">
+        <p class="hero-subtitle animate-in">🎊 It's Steph's special day! 🎊</p>
+        <h1 class="hero-title animate-in"><span>Happy Birthday</span><span class="hero-title-name">Steph!</span></h1>
+
+        <!-- CAKE -->
+        <div class="cake-wrapper animate-in" id="cake-wrapper" title="Click to blow out the candles!">
+          <div class="cake" id="cake">
+
+            <!-- NUMBER CANDLES "19" -->
+            <div class="number-candles">
+              <div class="num-candle">
+                <div class="num-flame flame" id="flame-0"></div>
+                <div class="num-body" style="--ca:#ff6b9d;--cb:#ff8fab">1</div>
+                <div class="wax-drop" style="--wa:#ff6b9d"></div>
+              </div>
+              <div class="num-candle">
+                <div class="num-flame flame" id="flame-1"></div>
+                <div class="num-body" style="--ca:#ffd93d;--cb:#ffe566">9</div>
+                <div class="wax-drop" style="--wa:#ffd93d"></div>
+              </div>
+            </div>
+
+            <!-- TOP TIER -->
+            <div class="cake-tier top-tier">
+              <div class="cake-frosting"></div>
+              <div class="cake-drip"></div>
+              <div class="tier-pearls"></div>
+            </div>
+
+            <!-- MID TIER -->
+            <div class="cake-tier mid-tier">
+              <div class="bow bow-left"></div>
+              <div class="bow bow-right"></div>
+              <div class="tier-pearls"></div>
+            </div>
+
+            <!-- BOT TIER -->
+            <div class="cake-tier bot-tier">
+              <div class="bow bow-left"></div>
+              <div class="bow bow-right"></div>
+              <div class="tier-pearls"></div>
+            </div>
+
+            <div class="cake-plate"></div>
+          </div>
+          <p class="cake-hint">🖱️ Click the cake to blow out the candles!</p>
+        </div>
+
+        <!-- WISH BUTTON -->
+        <button id="wish-btn" class="wish-btn animate-in" aria-label="Send birthday wishes">
+          <span class="btn-icon">🎁</span>
+          <span>Reveal Your Wish</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ========== WISH MODAL ========== -->
+    <div id="wish-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
+      <div class="modal-backdrop" id="modal-backdrop"></div>
+      <div class="modal-box">
+        <button class="modal-close" id="modal-close" aria-label="Close">✕</button>
+        <div class="modal-icon">🎂</div>
+        <h2 id="modal-title">A Special Wish For You</h2>
+        <p class="modal-message" id="modal-message">
+          Wishing you a day filled with joy, laughter, and all the things that make you smile!
+        </p>
+        <div class="modal-hearts" aria-hidden="true">
+          <span>💖</span><span>🌟</span><span>🎈</span><span>💫</span><span>🎉</span>
+        </div>
+        <button class="modal-btn" id="fireworks-btn">
+          🎆 Launch Fireworks!
+        </button>
+      </div>
+    </div>
+
+
+
+    <!-- ========== MESSAGES SECTION ========== -->
+    <section class="messages-section" id="messages">
+      <h2 class="section-title">Birthday Messages</h2>
+      <div class="cards-grid">
+        <article class="card" style="--delay:0s">
+          <div class="card-icon">🌟</div>
+          <h3>You Are Wonderful</h3>
+          <p>Every single day you bring light into the lives of everyone around you. Your kindness is unmatched!</p>
+        </article>
+        <article class="card" style="--delay:0.15s">
+          <div class="card-icon">🚀</div>
+          <h3>Chase Your Dreams</h3>
+          <p>May this year be the year you conquer every goal and soar to heights you've never imagined before.</p>
+        </article>
+        <article class="card" style="--delay:0.3s">
+          <div class="card-icon">💎</div>
+          <h3>You Are Priceless</h3>
+          <p>No treasure in the world compares to having someone like you. You are truly one of a kind.</p>
+        </article>
+        <article class="card" style="--delay:0.45s">
+          <div class="card-icon">🎶</div>
+          <h3>Dance & Celebrate</h3>
+          <p>Today is YOUR day. Put on your favourite song, dance like nobody's watching, and enjoy every moment!</p>
+        </article>
+        <article class="card" style="--delay:0.6s">
+          <div class="card-icon">🌸</div>
+          <h3>New Beginnings</h3>
+          <p>May this new year of your life bloom with beautiful moments, wonderful surprises, and endless happiness.
+          </p>
+        </article>
+        <article class="card" style="--delay:0.75s">
+          <div class="card-icon">❤️</div>
+          <h3>With All Our Love</h3>
+          <p>You are surrounded by people who love you deeply. Today we celebrate YOU — our favourite person!</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer">
+      <p>Made with <span class="heart-beat">❤️</span> just for you · <span id="footer-year"></span></p>
+    </footer>
+
+  </main>
+
+  <script src="main.js"></script>
+</body>
+
+</html>
