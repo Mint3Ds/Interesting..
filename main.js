@@ -401,6 +401,7 @@ function openGallery() {
   // Switch to waybackhome.mp3 for memories
   if (audio) {
     audio.src = "waybackhome.mp3";
+    audio.volume = 0.2; // Lower the volume for the memory song
     audio.play().catch(e => console.error("Audio playback error:", e));
   }
 
@@ -423,6 +424,7 @@ function closeGallery() {
   // Switch back to the main birthday music
   if (audio) {
     audio.src = "bd_music.mp3";
+    audio.volume = 0.5; // Reset to original volume
     audio.play().catch(e => console.error("Audio playback error:", e));
   }
 }
