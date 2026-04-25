@@ -12,12 +12,13 @@ let CONFIG = {
 };
 
 async function loadConfig() {
-  try {
-    const res = await fetch("/api/birthday-config");
-    if (res.ok) {
-      CONFIG = await res.json();
-    }
-  } catch (_) { /* use defaults */ }
+  CONFIG = {
+    birthdayPerson: "Steph",
+    message: "Happy Birthday Steph! 🎉 Wishing you a day filled with joy, laughter, and all the amazing things that make you smile. You deserve all the happiness in the world! 💖",
+    balloonCount: 20,
+    confettiCount: 200,
+    candleCount: 25,
+  };
 }
 
 // ─── UTILS ───────────────────────────────────────────────────
@@ -87,7 +88,7 @@ function createBalloons() {
 function setupCandleInteractions() {
   const cake = document.getElementById("cake-wrapper");
   if (!cake) return;
-  
+
   cake.addEventListener("click", (e) => {
     // Check if we clicked a candle or the digit specifically
     const candle = e.target.closest(".num-candle");
@@ -98,7 +99,7 @@ function setupCandleInteractions() {
       if (flame && !flame.classList.contains("out")) {
         flame.classList.add("out");
         createSmoke(candle);
-        
+
         // check if all candles are blown
         const allFlames = document.querySelectorAll(".flame:not(.out)");
         if (allFlames.length === 0) {
@@ -107,7 +108,7 @@ function setupCandleInteractions() {
         return; // Stop here if we hit a candle
       }
     }
-    
+
     // Otherwise, use the fallback: blow any remaining flames
     blowCandles();
   });
@@ -116,13 +117,13 @@ function setupCandleInteractions() {
 function blowCandles() {
   const flames = document.querySelectorAll(".flame:not(.out)");
   if (flames.length === 0) return;
-  
+
   flames.forEach((f, i) => {
     setTimeout(() => {
       f.classList.add("out");
       const candle = f.closest(".num-candle");
       if (candle) createSmoke(candle);
-      
+
       if (i === flames.length - 1) {
         setTimeout(() => launchConfetti(160), 400);
       }
@@ -342,16 +343,16 @@ let musicPlaying = false;
 function startExperience() {
   const overlay = document.getElementById("play-overlay");
   if (overlay) overlay.classList.add("hidden");
-  
+
   // Start Music
   if (!audio) {
-    audio = new Audio("assets/bd_music.mp3");
+    audio = new Audio("bd_music.mp3");
     audio.loop = true;
     audio.volume = 0.5;
     audio.play().catch(e => console.error("Audio playback error:", e));
     musicPlaying = true;
   }
-  
+
   // Start Loader
   const loader = document.getElementById("loader");
   if (loader) loader.classList.remove("hidden");
