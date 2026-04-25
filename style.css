@@ -323,39 +323,49 @@ body {
 }
 
 .num-body {
-  width: 35px;
-  height: 55px;
-  background: linear-gradient(160deg, #fff 0%, #ffd700 40%, #ff8fab 100%);
-  border: 1.5px solid rgba(255, 255, 255, 0.8);
-  border-radius: 8px;
+  width: 13px;
+  height: 39px;
+  background:
+    repeating-linear-gradient(-45deg,
+      transparent,
+      transparent 8px,
+      rgba(255, 255, 255, 0.4) 8px,
+      rgba(255, 255, 255, 0.4) 16px),
+    linear-gradient(160deg, var(--ca, #ffd700) 0%, var(--cb, #ff8fab) 100%);
+  border: 2.5px solid rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: 'Pacifico', cursive;
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   color: #fff;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
   box-shadow:
-    0 3px 10px rgba(0, 0, 0, 0.15),
-    inset 0 0 6px rgba(255, 255, 255, 0.5);
+    0 4px 12px rgba(0, 0, 0, 0.2),
+    inset -3px -3px 8px rgba(0, 0, 0, 0.1),
+    inset 3px 3px 8px rgba(255, 255, 255, 0.7);
   position: relative;
   cursor: pointer;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, filter 0.3s ease;
 }
 
 .num-candle:hover .num-body {
-  transform: translateY(-2px);
-  filter: brightness(1.1);
+  transform: translateY(-4px);
+  filter: brightness(1.15) drop-shadow(0 5px 15px rgba(255, 107, 157, 0.4));
 }
 
 .num-flame {
-  width: 14px;
-  height: 22px;
-  background: radial-gradient(ellipse at 50% 100%, #fff 0%, #ffeb3b 40%, #ff9800 80%, transparent 100%);
+  width: 7px;
+  height: 23px;
+  background: radial-gradient(ellipse at 50% 100%, #fff 10%, #ffeb3b 40%, #ff9800 80%, transparent 100%);
   border-radius: 50% 50% 20% 20%;
-  margin-bottom: 2px;
+  margin-bottom: -4px;
+  z-index: 2;
   animation: flicker 0.4s ease-in-out infinite alternate;
-  box-shadow: 0 0 15px #ffeb3b;
+  box-shadow:
+    0 0 20px #ffeb3b,
+    0 -5px 30px #ff9800;
   cursor: pointer;
   transition: opacity 0.4s ease, transform 0.4s ease, filter 0.4s ease;
 }
@@ -367,6 +377,31 @@ body {
   pointer-events: none;
   animation: none;
   box-shadow: none;
+}
+
+.wax-drop {
+  position: absolute;
+  top: 35px;
+  right: -2px;
+  width: 7px;
+  height: 18px;
+  background: var(--wa, #fff);
+  border-radius: 4px;
+  z-index: 3;
+  box-shadow: inset -1px -1px 3px rgba(0, 0, 0, 0.15), inset 1px 1px 3px rgba(255, 255, 255, 0.7);
+  opacity: 0.95;
+}
+
+.wax-drop::before {
+  content: '';
+  position: absolute;
+  top: 15px;
+  left: 0.5px;
+  width: 6px;
+  height: 6px;
+  background: var(--wa, #fff);
+  border-radius: 50%;
+  box-shadow: inset -1px -1px 2px rgba(0, 0, 0, 0.15);
 }
 
 /* ── SMOKE EFFECT ─────────────────────────────────── */
@@ -405,10 +440,10 @@ body {
 /* ── HELLO KITTY DECORATION ─────────────────────── */
 .hello-kitty {
   position: absolute;
-  top: -3px;
+  top: 15px;
   left: 50%;
   transform: translateX(-50%);
-  width: 94px;
+  width: 89px;
   height: 75px;
   z-index: 10;
   pointer-events: none;
@@ -606,7 +641,7 @@ body {
 .top-tier {
   width: 140px;
   height: 65px;
-  background: #ffffff;
+  background: #ffdeeb;
   margin: 0 auto;
   z-index: 3;
   border: 2px solid #fce4ec;
@@ -888,7 +923,7 @@ body {
   left: -20px;
   font-size: 4rem;
   transform: rotate(-15deg);
-  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15));
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.15));
 }
 
 .modal-close {
@@ -1411,7 +1446,7 @@ body {
   margin: auto;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
   background: var(--bg-dark);
   border: 4px solid var(--primary);
   aspect-ratio: 4 / 3;
@@ -1431,7 +1466,8 @@ body {
 }
 
 /* Next & previous buttons */
-.prev-btn, .next-btn {
+.prev-btn,
+.next-btn {
   cursor: pointer;
   position: absolute;
   top: 50%;
@@ -1458,7 +1494,8 @@ body {
   border-radius: 0 10px 10px 0;
 }
 
-.prev-btn:hover, .next-btn:hover {
+.prev-btn:hover,
+.next-btn:hover {
   background-color: var(--primary);
 }
 
@@ -1470,8 +1507,13 @@ body {
 }
 
 @keyframes slideFade {
-  from {opacity: .4} 
-  to {opacity: 1}
+  from {
+    opacity: .4
+  }
+
+  to {
+    opacity: 1
+  }
 }
 
 /* Dots */
@@ -1492,7 +1534,8 @@ body {
   border: 1px solid var(--primary);
 }
 
-.dot.active, .dot:hover {
+.dot.active,
+.dot:hover {
   background-color: var(--primary);
   transform: scale(1.3);
 }
