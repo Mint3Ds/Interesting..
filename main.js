@@ -389,7 +389,7 @@ function resetSlideInterval() {
   if (slideInterval) clearInterval(slideInterval);
   slideInterval = setInterval(() => {
     changeSlide(1);
-  }, 3500); // Change image every 3.5 seconds
+  }, 2500); // Change image every 3.5 seconds
 }
 
 function openGallery() {
@@ -397,13 +397,19 @@ function openGallery() {
   if (!modal) return;
   modal.hidden = false;
   document.body.style.overflow = "hidden";
-  
+
+  // Switch to waybackhome.mp3 for memories
+  if (audio) {
+    audio.src = "waybackhome.mp3";
+    audio.play().catch(e => console.error("Audio playback error:", e));
+  }
+
   if (slides.length === 0) {
     slides = document.querySelectorAll(".slide");
     dots = document.querySelectorAll(".dot");
     showSlide(0);
   }
-  
+
   // Start or reset the auto-rotate timer whenever opened
   resetSlideInterval();
 }
@@ -413,6 +419,12 @@ function closeGallery() {
   if (modal) modal.hidden = true;
   document.body.style.overflow = "";
   if (slideInterval) clearInterval(slideInterval);
+  
+  // Switch back to the main birthday music
+  if (audio) {
+    audio.src = "bd_music.mp3";
+    audio.play().catch(e => console.error("Audio playback error:", e));
+  }
 }
 
 function changeSlide(n) {
@@ -427,7 +439,7 @@ function currentSlide(n) {
 
 function showSlide(n) {
   if (slides.length === 0) return;
-  
+
   if (n >= slides.length) slideIndex = 0;
   else if (n < 0) slideIndex = slides.length - 1;
   else slideIndex = n;
