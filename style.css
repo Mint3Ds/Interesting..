@@ -264,7 +264,6 @@ body {
 .scroll-down-indicator {
   position: absolute;
   bottom: 25px;
-  left: 50%;
   transform: translateX(-50%);
   display: flex;
   flex-direction: column;
@@ -274,6 +273,14 @@ body {
   text-decoration: none;
   opacity: 0.8;
   transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.left-indicator {
+  left: 5%;
+}
+
+.right-indicator {
+  left: 95%;
 }
 
 .scroll-down-indicator:hover {
@@ -307,12 +314,12 @@ body {
 
 .arrow-down span {
   display: block;
-  width: 10px;
-  height: 10px;
-  border-bottom: 2.5px solid var(--primary);
-  border-right: 2.5px solid var(--primary);
+  width: 25px;
+  height: 25px;
+  border-bottom: 4px solid var(--primary);
+  border-right: 4px solid var(--primary);
   transform: rotate(45deg);
-  margin: -4px 0;
+  margin: -10px 0;
   animation: arrowPulse 2s infinite;
   box-shadow: 2px 2px 4px rgba(255, 107, 157, 0.1);
 }
@@ -326,15 +333,39 @@ body {
 }
 
 @keyframes scrollWheel {
-  0% { top: 6px; opacity: 1; height: 8px; }
-  30% { top: 16px; opacity: 0; height: 4px; }
-  100% { top: 6px; opacity: 0; height: 8px; }
+  0% {
+    top: 6px;
+    opacity: 1;
+    height: 8px;
+  }
+
+  30% {
+    top: 16px;
+    opacity: 0;
+    height: 4px;
+  }
+
+  100% {
+    top: 6px;
+    opacity: 0;
+    height: 8px;
+  }
 }
 
 @keyframes arrowPulse {
-  0% { opacity: 0; transform: rotate(45deg) translate(-5px, -5px); }
-  50% { opacity: 1; }
-  100% { opacity: 0; transform: rotate(45deg) translate(5px, 5px); }
+  0% {
+    opacity: 0;
+    transform: rotate(45deg) translate(-10px, -10px);
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: rotate(45deg) translate(10px, 10px);
+  }
 }
 
 /* ============================================================
