@@ -345,6 +345,11 @@ function startExperience() {
   const overlay = document.getElementById("play-overlay");
   if (overlay) overlay.classList.add("hidden");
 
+  // Re-enable scrolling and snap to top
+  document.body.style.overflow = "";
+  document.documentElement.style.overflow = "";
+  window.scrollTo(0, 0);
+
   // Start Music
   if (!audio) {
     audio = new Audio("bd_music.mp3");
@@ -498,6 +503,14 @@ function setYear() {
 async function init() {
   await loadConfig();
   setYear();
+
+  // Prevent scrolling while on the initial overlay
+  const overlay = document.getElementById("play-overlay");
+  if (overlay && !overlay.classList.contains("hidden")) {
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+    window.scrollTo(0, 0);
+  }
 
   // Setup Start Interaction
   document.getElementById("start-btn")?.addEventListener("click", startExperience);
