@@ -1240,8 +1240,51 @@ body {
 
 .card p {
   color: var(--text-muted);
-  line-height: 1.7;
-  font-size: 0.95rem;
+  line-height: 1.8;
+  font-size: 1.05rem;
+  font-style: italic;
+  position: relative;
+  z-index: 1;
+  padding: 0 1.5rem;
+  
+  /* Keep boxes uniform size */
+  max-height: 160px;
+  overflow-y: auto;
+}
+
+/* Neat custom scrollbar */
+.card p::-webkit-scrollbar {
+  width: 6px;
+}
+.card p::-webkit-scrollbar-track {
+  background: rgba(255, 107, 157, 0.05);
+  border-radius: 10px;
+}
+.card p::-webkit-scrollbar-thumb {
+  background: rgba(255, 107, 157, 0.4);
+  border-radius: 10px;
+}
+.card p::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
+.quote {
+  font-family: 'Georgia', serif;
+  font-size: 2rem;
+  color: var(--primary);
+  opacity: 0.9;
+  font-weight: 900;
+  line-height: 0;
+  vertical-align: -0.2em;
+  display: inline-block;
+}
+
+.quote:first-child {
+  margin-right: 4px;
+}
+
+.quote:last-child {
+  margin-left: 4px;
 }
 
 /* ============================================================
