@@ -367,7 +367,7 @@ function preloadAssets(onComplete) {
 
   // Timeout safety — never hang longer than 20s
   const giveUpTimer = setTimeout(() => {
-    setLoaderText("Almost there… 🎀");
+    setLoaderText("Almost there…");
     onComplete();
   }, 20000);
 
@@ -380,7 +380,7 @@ function preloadAssets(onComplete) {
     }
   }
 
-  setLoaderText("Loading photos…");
+  setLoaderText("Loading…");
 
   // Preload images
   imgSrcs.forEach(src => {
@@ -427,7 +427,7 @@ function startExperience() {
 
   // Preload everything, then reveal the page
   preloadAssets(() => {
-    setLoaderText("Get ready! 🎉");
+    setLoaderText("Ready!");
     updateLoaderProgress(1, 1);
 
     setTimeout(() => {
