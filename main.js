@@ -420,36 +420,22 @@ function startExperience() {
   document.documentElement.style.overflow = "";
   window.scrollTo(0, 0);
 
-  // Show loader immediately
-  const loader = document.getElementById("loader");
-  if (loader) loader.classList.remove("hidden");
-  updateLoaderProgress(0, 1);
+  // Run celebration immediately (assets already loaded)
+  createStars();
+  createBalloons();
+  setTimeout(setupAnimateIn, 200);
+  setTimeout(() => launchConfetti(80), 400);
 
-  // Preload everything, then reveal the page
-  preloadAssets(() => {
-    setLoaderText("Ready!");
-    updateLoaderProgress(1, 1);
-
-    setTimeout(() => {
-      hideLoader();
-      createStars();
-      createBalloons();
-      setTimeout(setupAnimateIn, 200);
-      setTimeout(() => launchConfetti(80), 400);
-
-      // Start music after the loader fade-out finishes (0.8s CSS transition)
-      setTimeout(() => {
-        if (!audio) {
-          audio = new Audio("bd_music.mp3");
-          audio.loop = true;
-          audio.volume = 0.5;
-          audio.play().catch(e => console.error("Audio playback error:", e));
-          musicPlaying = true;
-        }
-      }, 850);
-    }, 600);
-  });
-
+  // Start music slightly after page is visible
+  setTimeout(() => {
+    if (!audio) {
+      audio = new Audio("bd_music.mp3");
+      audio.loop = true;
+      audio.volume = 0.5;
+      audio.play().catch(e => console.error("Audio playback error:", e));
+      musicPlaying = true;
+    }
+  }, 500);
 }
 
 
@@ -584,13 +570,25 @@ async function init() {
   await loadConfig();
   setYear();
 
-  // Prevent scrolling while on the initial overlay
+  // Hide overlay immediately, show loader, and start preloading assets
   const overlay = document.getElementById("play-overlay");
-  if (overlay && !overlay.classList.contains("hidden")) {
-    document.body.style.overflow = "hidden";
-    document.documentElement.style.overflow = "hidden";
-    window.scrollTo(0, 0);
-  }
+  if (overlay) overlay.classList.add("hidden");
+  document.body.style.overflow = "hidden";
+  document.documentElement.style.overflow = "hidden";
+  window.scrollTo(0, 0);
+
+  const loader = document.getElementById("loader");
+  if (loader) loader.classList.remove("hidden");
+  updateLoaderProgress(0, 1);
+
+  preloadAssets(() => {
+    updateLoaderProgress(1, 1);
+    setTimeout(() => {
+      hideLoader();
+      // Now show the surprise overlay
+      if (overlay) overlay.classList.remove("hidden");
+    }, 400);
+  });
 
   // Setup Start Interaction
   document.getElementById("start-btn")?.addEventListener("click", startExperience);
