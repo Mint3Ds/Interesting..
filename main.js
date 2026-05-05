@@ -431,22 +431,25 @@ function startExperience() {
     updateLoaderProgress(1, 1);
 
     setTimeout(() => {
-      // Start music now that it's buffered
-      if (!audio) {
-        audio = new Audio("bd_music.mp3");
-        audio.loop = true;
-        audio.volume = 0.5;
-        audio.play().catch(e => console.error("Audio playback error:", e));
-        musicPlaying = true;
-      }
-
       hideLoader();
       createStars();
       createBalloons();
       setTimeout(setupAnimateIn, 200);
       setTimeout(() => launchConfetti(80), 400);
+
+      // Start music after the loader fade-out finishes (0.8s CSS transition)
+      setTimeout(() => {
+        if (!audio) {
+          audio = new Audio("bd_music.mp3");
+          audio.loop = true;
+          audio.volume = 0.5;
+          audio.play().catch(e => console.error("Audio playback error:", e));
+          musicPlaying = true;
+        }
+      }, 850);
     }, 600);
   });
+
 }
 
 
