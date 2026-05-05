@@ -360,7 +360,7 @@ function preloadAssets(onComplete) {
   const imgSrcs = Array.from(imgEls).map(img => img.getAttribute("src"));
 
   // Audio files to preload (enough data to start playing)
-  const audioSrcs = ["bd_music.mp3", "waybackhome.mp3"];
+  const audioSrcs = ["bd-music_lyric.mp3", "bd-music_theme.mp3", "waybackhome.mp3"];
 
   const total = imgSrcs.length + audioSrcs.length;
   let loaded = 0;
@@ -429,9 +429,19 @@ function startExperience() {
   // Start music slightly after page is visible
   setTimeout(() => {
     if (!audio) {
-      audio = new Audio("bd_music.mp3");
-      audio.loop = true;
+      audio = new Audio("bd-music_lyric.mp3");
       audio.volume = 0.5;
+      
+      // When the lyric version ends, switch to the theme version and loop it
+      audio.addEventListener("ended", () => {
+        // Only switch if we are still playing the lyric (user didn't open gallery)
+        if (audio.src.includes("bd-music_lyric")) {
+          audio.src = "bd-music_theme.mp3";
+          audio.loop = true;
+          audio.play().catch(e => console.error("Audio playback error:", e));
+        }
+      });
+      
       audio.play().catch(e => console.error("Audio playback error:", e));
       musicPlaying = true;
     }
@@ -448,6 +458,27 @@ function openModal() {
 }
 function closeModal() {
   document.getElementById("wish-modal").hidden = true;
+  document.body.style.overflow = "";
+}
+
+// ─── CARD MODAL ────────────────────────────────────────────────
+function openCardModal(card) {
+  const icon = card.querySelector(".card-icon")?.innerText || "🎀";
+  const name = card.querySelector("h3")?.innerText || "Friend";
+  const messageHtml = card.querySelector("p")?.innerHTML || "";
+
+  document.getElementById("card-modal-icon").innerText = icon;
+  document.getElementById("card-modal-title").innerText = name;
+  document.getElementById("card-modal-message").innerHTML = messageHtml;
+
+  const modal = document.getElementById("card-modal");
+  modal.hidden = false;
+  document.body.style.overflow = "hidden";
+}
+
+function closeCardModal() {
+  const modal = document.getElementById("card-modal");
+  if (modal) modal.hidden = true;
   document.body.style.overflow = "";
 }
 
@@ -493,9 +524,10 @@ function closeGallery() {
   document.body.style.overflow = "";
   if (slideInterval) clearInterval(slideInterval);
 
-  // Switch back to the main birthday music
+  // Switch back to the main birthday music (theme)
   if (audio) {
-    audio.src = "bd_music.mp3";
+    audio.src = "bd-music_theme.mp3";
+    audio.loop = true;
     audio.volume = 0.5; // Reset to original volume
     audio.play().catch(e => console.error("Audio playback error:", e));
   }
@@ -604,6 +636,13 @@ async function init() {
   document.getElementById("modal-close")?.addEventListener("click", closeModal);
   document.getElementById("modal-backdrop")?.addEventListener("click", closeModal);
 
+  // Card modal interactions
+  document.querySelectorAll(".card").forEach(card => {
+    card.addEventListener("click", () => openCardModal(card));
+  });
+  document.getElementById("card-modal-close")?.addEventListener("click", closeCardModal);
+  document.getElementById("card-modal-backdrop")?.addEventListener("click", closeCardModal);
+
   // Gallery modal
   document.getElementById("open-gallery-btn")?.addEventListener("click", openGallery);
   document.getElementById("gallery-close")?.addEventListener("click", closeGallery);
@@ -627,6 +666,7 @@ async function init() {
     if (e.key === "Escape") {
       closeModal();
       closeGallery();
+      closeCardModal();
     }
   });
 }
