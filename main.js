@@ -341,6 +341,76 @@ function startCanvasLoop() {
 let audio = null;
 let musicPlaying = false;
 
+function updateLoaderProgress(loaded, total) {
+  const pct = Math.round((loaded / total) * 100);
+  const bar = document.getElementById("loader-progress-bar");
+  const label = document.getElementById("loader-percent");
+  if (bar) bar.style.width = pct + "%";
+  if (label) label.textContent = pct + "%";
+}
+
+function setLoaderText(msg) {
+  const el = document.getElementById("loader-text");
+  if (el) el.textContent = msg;
+}
+
+function preloadAssets(onComplete) {
+  // Collect all gallery image srcs
+  const imgEls = document.querySelectorAll(".slide img");
+  const imgSrcs = Array.from(imgEls).map(img => img.getAttribute("src"));
+
+  // Audio files to preload (enough data to start playing)
+  const audioSrcs = ["bd_music.mp3", "waybackhome.mp3"];
+
+  const total = imgSrcs.length + audioSrcs.length;
+  let loaded = 0;
+
+  // Timeout safety — never hang longer than 20s
+  const giveUpTimer = setTimeout(() => {
+    setLoaderText("Almost there… 🎀");
+    onComplete();
+  }, 20000);
+
+  function assetLoaded() {
+    loaded++;
+    updateLoaderProgress(loaded, total);
+    if (loaded >= total) {
+      clearTimeout(giveUpTimer);
+      onComplete();
+    }
+  }
+
+  setLoaderText("Loading photos…");
+
+  // Preload images
+  imgSrcs.forEach(src => {
+    const img = new Image();
+    img.onload = img.onerror = assetLoaded;
+    img.src = src;
+  });
+
+  // Preload audio (wait for enough data to play)
+  audioSrcs.forEach(src => {
+    const a = new Audio();
+    a.preload = "auto";
+    const done = () => {
+      a.removeEventListener("canplaythrough", done);
+      a.removeEventListener("error", done);
+      assetLoaded();
+    };
+    a.addEventListener("canplaythrough", done, { once: true });
+    a.addEventListener("error", done, { once: true });
+    a.src = src;
+    a.load();
+  });
+
+  // Edge case: if nothing to load
+  if (total === 0) {
+    clearTimeout(giveUpTimer);
+    onComplete();
+  }
+}
+
 function startExperience() {
   const overlay = document.getElementById("play-overlay");
   if (overlay) overlay.classList.add("hidden");
@@ -350,28 +420,35 @@ function startExperience() {
   document.documentElement.style.overflow = "";
   window.scrollTo(0, 0);
 
-  // Start Music
-  if (!audio) {
-    audio = new Audio("bd_music.mp3");
-    audio.loop = true;
-    audio.volume = 0.5;
-    audio.play().catch(e => console.error("Audio playback error:", e));
-    musicPlaying = true;
-  }
-
-  // Start Loader
+  // Show loader immediately
   const loader = document.getElementById("loader");
   if (loader) loader.classList.remove("hidden");
+  updateLoaderProgress(0, 1);
 
-  // Run the celebration flow after a delay
-  setTimeout(() => {
-    hideLoader();
-    createStars();
-    createBalloons();
-    setTimeout(setupAnimateIn, 200);
-    setTimeout(() => launchConfetti(80), 400);
-  }, 2200);
+  // Preload everything, then reveal the page
+  preloadAssets(() => {
+    setLoaderText("Get ready! 🎉");
+    updateLoaderProgress(1, 1);
+
+    setTimeout(() => {
+      // Start music now that it's buffered
+      if (!audio) {
+        audio = new Audio("bd_music.mp3");
+        audio.loop = true;
+        audio.volume = 0.5;
+        audio.play().catch(e => console.error("Audio playback error:", e));
+        musicPlaying = true;
+      }
+
+      hideLoader();
+      createStars();
+      createBalloons();
+      setTimeout(setupAnimateIn, 200);
+      setTimeout(() => launchConfetti(80), 400);
+    }, 600);
+  });
 }
+
 
 // ─── WISH MODAL ────────────────────────────────────────────────
 function openModal() {
