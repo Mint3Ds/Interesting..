@@ -510,7 +510,6 @@ function openGallery() {
 
   if (slides.length === 0) {
     slides = document.querySelectorAll(".slide");
-    dots = document.querySelectorAll(".dot");
     showSlide(0);
   }
 
@@ -538,11 +537,6 @@ function changeSlide(n) {
   resetSlideInterval(); // Reset timer when manually navigating
 }
 
-function currentSlide(n) {
-  showSlide(n);
-  resetSlideInterval(); // Reset timer when clicking a dot
-}
-
 function showSlide(n) {
   if (slides.length === 0) return;
 
@@ -551,10 +545,13 @@ function showSlide(n) {
   else slideIndex = n;
 
   slides.forEach(slide => slide.style.display = "none");
-  dots.forEach(dot => dot.classList.remove("active"));
 
   slides[slideIndex].style.display = "block";
-  if (dots[slideIndex]) dots[slideIndex].classList.add("active");
+  
+  const counter = document.getElementById("slide-counter");
+  if (counter) {
+    counter.innerText = `${slideIndex + 1} / ${slides.length}`;
+  }
 }
 
 // ─── HERO NAME ────────────────────────────────────────────────
@@ -651,9 +648,6 @@ async function init() {
   // Slideshow controls
   document.getElementById("prev-slide")?.addEventListener("click", () => changeSlide(-1));
   document.getElementById("next-slide")?.addEventListener("click", () => changeSlide(1));
-  document.querySelectorAll(".dot").forEach((dot, index) => {
-    dot.addEventListener("click", () => currentSlide(index));
-  });
 
   // Fireworks button inside modal
   document.getElementById("fireworks-btn")?.addEventListener("click", () => {
