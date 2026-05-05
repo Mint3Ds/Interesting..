@@ -1193,12 +1193,15 @@ body {
 }
 
 .cards-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 1.5rem;
 }
 
 .card {
+  flex: 1 1 320px;
+  max-width: 420px;
   background: var(--card-bg);
   border: 4px solid var(--bg-dark);
   border-radius: var(--radius);
@@ -1232,23 +1235,23 @@ body {
 }
 
 .card h3 {
-  font-size: 1.15rem;
+  font-size: 1.3rem;
   font-weight: 700;
   color: var(--secondary);
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.8rem;
 }
 
 .card p {
   color: var(--text-muted);
-  line-height: 1.8;
-  font-size: 1.05rem;
+  line-height: 1.85;
+  font-size: 1.1rem;
   font-style: italic;
   position: relative;
   z-index: 1;
   padding: 0 1.5rem;
   
   /* Keep boxes uniform size */
-  max-height: 160px;
+  max-height: 280px;
   overflow-y: auto;
 }
 
