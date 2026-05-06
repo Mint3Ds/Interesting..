@@ -15,7 +15,7 @@ async function loadConfig() {
   CONFIG = {
     birthdayPerson: "Steph",
     message: "Happy Birthday Steph! 🎉 Wishing you a day filled with joy, laughter, and all the amazing things that make you smile. You deserve all the happiness in the world! 💖",
-    balloonCount: 20,
+    balloonCount: 10,
     confettiCount: 200,
     candleCount: 25,
   };
@@ -431,7 +431,7 @@ function startExperience() {
     if (!audio) {
       audio = new Audio("bd-music_lyric.mp3");
       audio.volume = 0.5;
-      
+
       // When the lyric version ends, switch to the theme version and loop it
       audio.addEventListener("ended", () => {
         // Only switch if we are still playing the lyric (user didn't open gallery)
@@ -441,7 +441,7 @@ function startExperience() {
           audio.play().catch(e => console.error("Audio playback error:", e));
         }
       });
-      
+
       audio.play().catch(e => console.error("Audio playback error:", e));
       musicPlaying = true;
     }
@@ -547,7 +547,7 @@ function showSlide(n) {
   slides.forEach(slide => slide.style.display = "none");
 
   slides[slideIndex].style.display = "block";
-  
+
   const counter = document.getElementById("slide-counter");
   if (counter) {
     counter.innerText = `${slideIndex + 1} / ${slides.length}`;
